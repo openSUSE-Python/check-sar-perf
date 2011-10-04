@@ -99,13 +99,14 @@ class SarNRPE:
         # Create dictionary
         for i in range(len(columns)):
             # Remove first column if data contains only letters
-            if i != 0 or not search.match(data[i]):
-                # Remove characters that cause issues (%/)
-                badchars=['%','/']
-                columns[i] = ''.join(j for j in columns[i] if j not in badchars)
-                string = "%s=%s" %(columns[i].strip('%/'), data[i].strip())
-                self.stats.append(string)
-                #print "Appended data: ", data[i]
+            #if i != 0 or not search.match(data[i]):
+            if (i != 0 or not search.match(data[i])) and (columns[i] != "DEV"):
+               # Remove characters that cause issues (%/)
+               badchars=['%','/']
+               columns[i] = ''.join(j for j in columns[i] if j not in badchars)
+               string = "%s=%s" %(columns[i].strip('%/'), data[i].strip())
+               self.stats.append(string)
+               #print "Appended data: ", data[i]
 
 def CheckBin(program):
     '''Ensure the program exists in the PATH'''
